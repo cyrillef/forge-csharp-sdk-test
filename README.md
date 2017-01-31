@@ -42,7 +42,7 @@ NOTE: RestSharp versions greater than 105.1.0 have a bug which causes file uploa
 See [RestSharp#742](https://github.com/restsharp/RestSharp/issues/742)
 
 
-### Build teh SDK from sources
+### Build the SDK from sources
 Run the following command to generate the DLL
 - [Mac/Linux] `/bin/sh build.sh`
 - [Windows] `build.bat`
@@ -74,6 +74,7 @@ This type of token is given directly to the application. To get a 2-legged token
 ```csharp
 using Autodesk.Forge;
 using Autodesk.Forge.Client;
+using Autodesk.Forge.Model;
 
 namespace my_namespace {
     class my_class {
@@ -85,7 +86,7 @@ namespace my_namespace {
         // Synchronous example
         internal static ApiResponse<dynamic> _2leggedSynchronous () {
             try {
-                ApiResponse<dynamic> bearer =_twoLeggedApi.AuthenticateWithHttpInfo (FORGE_CLIENT_ID, FORGE_CLIENT_SECRET, CLIENT_CREDENTIALS, _scope) ;
+                ApiResponse<dynamic> bearer =_twoLeggedApi.AuthenticateWithHttpInfo (FORGE_CLIENT_ID, FORGE_CLIENT_SECRET, oAuthConstants.CLIENT_CREDENTIALS, _scope) ;
                 //string token =bearer.Data.token_type + " " + bearer.Data.access_token ;
                 //DateTime dt =DateTime.Now ;
                 //dt.AddSeconds (double.Parse (bearer.Data.expires_in.ToString ())) ;
@@ -104,7 +105,7 @@ namespace my_namespace {
         // Asynchronous example (recommended)
         internal static async Task<ApiResponse<dynamic>> _2leggedAsync () {
         	try {
-        		ApiResponse<dynamic> bearer =await _twoLeggedApi.AuthenticateAsyncWithHttpInfo (FORGE_CLIENT_ID, FORGE_CLIENT_SECRET, CLIENT_CREDENTIALS, _scope) ;
+        		ApiResponse<dynamic> bearer =await _twoLeggedApi.AuthenticateAsyncWithHttpInfo (FORGE_CLIENT_ID, FORGE_CLIENT_SECRET, oAuthConstants.CLIENT_CREDENTIALS, _scope) ;
                 //string token =bearer.Data.token_type + " " + bearer.Data.access_token ;
                 //DateTime dt =DateTime.Now ;
                 //dt.AddSeconds (double.Parse (bearer.Data.expires_in.ToString ())) ;
@@ -122,6 +123,7 @@ namespace my_namespace {
 
 	}
 }
+```
 
 
 #### 3-Legged Token
@@ -161,7 +163,7 @@ namespace my_namespace {
                 IAsyncResult result =_httpListener.BeginGetContext (_3leggedAsyncWaitForCode, cb) ;
 
                 // Generate a URL page that asks for permissions for the specified scopes.
-                string oauthUrl =_threeLeggedApi.Authorize (FORGE_CLIENT_ID, "code", FORGE_CALLBACK, _scope) ;
+                string oauthUrl =_threeLeggedApi.Authorize (FORGE_CLIENT_ID, oAuthConstants.CODE, FORGE_CALLBACK, _scope) ;
                 System.Diagnostics.Process.Start (new System.Diagnostics.ProcessStartInfo (oauthUrl)) ;
             } catch ( Exception /*ex*/ ) {
             }
@@ -195,7 +197,7 @@ Request an access token using the authorization code you received, as shown belo
 ```csharp
                 if ( !string.IsNullOrEmpty (code) ) {
                     // Request an access token using the authorization code
-                    ApiResponse<dynamic> bearer =await _threeLeggedApi.GettokenAsyncWithHttpInfo (FORGE_CLIENT_ID, FORGE_CLIENT_SECRET, "authorization_code", code, FORGE_CALLBACK) ;
+                    ApiResponse<dynamic> bearer =await _threeLeggedApi.GettokenAsyncWithHttpInfo (FORGE_CLIENT_ID, FORGE_CLIENT_SECRET, oAuthConstants.AUTHORIZATION_CODE, code, FORGE_CALLBACK) ;
                     //string token =bearer.Data.token_type + " " + bearer.Data.access_token ;
                     //DateTime dt =DateTime.Now ;
                     //dt.AddSeconds (double.Parse (bearer.Data.expires_in.ToString ())) ;

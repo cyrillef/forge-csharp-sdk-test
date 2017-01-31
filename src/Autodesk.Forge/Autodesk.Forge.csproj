@@ -24,7 +24,7 @@ limitations under the License.
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DB45EC36-02E6-4E99-8DA5-D1107AE2D4AE}</ProjectGuid>
+    <ProjectGuid>{6E7F874D-C4A2-4F51-B405-4865BEA688FE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Autodesk.Forge</RootNamespace>

@@ -31,10 +31,10 @@ using System.Reflection;
 namespace Autodesk.Forge
 {
 
-	public class oAuthConstants {
-		public const string CLIENT_CREDENTIALS ="client_credentials" ;
-		public const string CODE ="code" ;
-		public const string AUTHORIZATION_CODE ="authorization_code" ;
-	}
+    public class oAuthConstants {
+        public const string CLIENT_CREDENTIALS ="client_credentials" ;
+        public const string CODE ="code" ;
+        public const string AUTHORIZATION_CODE ="authorization_code" ;
+    }
 
 }
